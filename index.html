@@ -28,42 +28,42 @@
     <div class="hero__visual">
       <img src="assets/hero-background.png" alt="" class="hero__bg" aria-hidden="true">
       <div class="hero__visual-text">
-        <h1 class="hero__title reveal-up is-visible">Desperte a sua imaginação<br>e explore novos mundos</h1>
-        <p class="hero__subtitle reveal-up is-visible">Junte-se ao clube de assinatura Encantos Literários e descubra maravilhas e aventuras a cada página.</p>
+        <h1 class="hero__title reveal-up" style="--d: 0s">Desperte a sua imaginação<br>e explore novos mundos</h1>
+        <p class="hero__subtitle reveal-up" style="--d: 0.2s">Junte-se ao clube de assinatura Encantos Literários e descubra maravilhas e aventuras a cada página.</p>
       </div>
     </div>
 
-    <img src="assets/mystery-opened-spellbook.png" alt="" class="mystery mystery--center float-anim" aria-hidden="true">
+    <img src="assets/mystery-opened-spellbook.png" alt="" class="mystery mystery--center reveal-fade wobble-anim wobble-anim--1" style="--d: 1s" aria-hidden="true">
 
-    <p class="hero__lead reveal-up is-visible">
+    <p class="hero__lead reveal-up" style="--d: 0.6s">
       Receba todo mês um <span class="hl">livro surpresa</span> do seu tema favorito, acompanhado de
       <span class="hl">brindes exclusivos</span> que tornarão a sua experiência literária <span class="hl">encantadora</span>.
     </p>
 
     <div class="hero__mystery-row">
-      <img src="assets/mystery-ouija-planchette.png" alt="" class="mystery mystery--corner float-anim" aria-hidden="true">
-      <img src="assets/mystery-crystal-ball.png" alt="" class="mystery mystery--corner float-anim-delay" aria-hidden="true">
+      <img src="assets/mystery-ouija-planchette.png" alt="" class="mystery mystery--corner reveal-fade wobble-anim wobble-anim--2" style="--d: 1.3s" aria-hidden="true">
+      <img src="assets/mystery-crystal-ball.png" alt="" class="mystery mystery--corner reveal-fade wobble-anim wobble-anim--3" style="--d: 1.5s" aria-hidden="true">
     </div>
   </section>
 
   <!-- ============ KIT DO MÊS ============ -->
   <section class="kit" id="kit">
-    <h2 class="section-title section-title--center reveal-up is-visible">
+    <h2 class="section-title section-title--center reveal-up">
       <img src="assets/star.svg" class="title-spark" alt="" aria-hidden="true">
       Conheça o kit mensal
       <img src="assets/star.svg" class="title-spark" alt="" aria-hidden="true">
     </h2>
-    <p class="section-subtitle reveal-up is-visible">Recebe uma caixa surpresa todos os meses</p>
+    <p class="section-subtitle reveal-up">Recebe uma caixa surpresa todos os meses</p>
 
-    <div class="kit__stage is-visible">
+    <div class="kit__stage">
       <svg class="kit__lines" viewBox="0 0 560 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <path d="M180 75 C150 65 110 68 78 82" stroke="#9547A5" stroke-width="2" fill="none" marker-start="url(#arrow-pink)"/>
-        <path d="M117 287 C 92 300 62 310 40 320" stroke="#358BB9" stroke-width="2" fill="none" marker-start="url(#arrow-blue)"/>
-        <path d="M392 298 C 352 358 312 418 277 468" stroke="#73B6D2" stroke-width="2" fill="none" marker-end="url(#arrow-light)"/>
+        <path d="M180 75 C160 58 128 52 116 64 C106 74 118 90 106 92 C92 94 86 86 78 82" stroke="#9547A5" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
+        <path d="M117 287 C98 268 68 274 74 294 C78 308 54 302 40 320" stroke="#9547A5" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
+        <path d="M392 298 C420 335 388 372 404 402 C414 422 388 434 396 468" stroke="#9547A5" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
         <defs>
-          <marker id="arrow-pink" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><circle cx="4" cy="4" r="3" fill="#9547A5"/></marker>
-          <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><circle cx="4" cy="4" r="3" fill="#358BB9"/></marker>
-          <marker id="arrow-light" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><circle cx="4" cy="4" r="3" fill="#73B6D2"/></marker>
+          <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto" markerUnits="strokeWidth">
+            <path d="M0 0 L10 5 L0 10 Z" fill="#9547A5"/>
+          </marker>
         </defs>
       </svg>
 
@@ -87,9 +87,9 @@
     <img src="assets/pricing-background.png" alt="" class="plans__texture" aria-hidden="true">
 
     <div class="plans__content">
-      <h2 class="section-title section-title--center reveal-up is-visible">Assinatura<br>Encantos Literários</h2>
+      <h2 class="section-title section-title--center reveal-up">Assinatura<br>Encantos Literários</h2>
 
-      <div class="plans__grid is-visible">
+      <div class="plans__grid">
         <img src="assets/star.svg" class="plans__spark plans__spark--1" alt="" aria-hidden="true">
         <img src="assets/star.svg" class="plans__spark plans__spark--2" alt="" aria-hidden="true">
         <img src="assets/star.svg" class="plans__spark plans__spark--3" alt="" aria-hidden="true">
@@ -172,12 +172,56 @@
 </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var targets = document.querySelectorAll('.reveal-up, .kit__stage, .plans__grid');
-    targets.forEach(function (el) {
+  (function () {
+    var STAGE_SELECTOR = '.reveal-up, .reveal-fade, .kit__stage, .plans__grid';
+
+    function pendingTargets() {
+      return Array.prototype.filter.call(
+        document.querySelectorAll(STAGE_SELECTOR),
+        function (el) { return !el.classList.contains('is-visible'); }
+      );
+    }
+
+    function reveal(el) {
       el.classList.add('is-visible');
+    }
+
+    function isInViewport(el) {
+      var rect = el.getBoundingClientRect();
+      var margin = window.innerHeight * 0.05;
+      return rect.top < window.innerHeight - margin && rect.bottom > 0;
+    }
+
+    function fallbackSweep() {
+      pendingTargets().forEach(function (el) {
+        if (isInViewport(el)) reveal(el);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var targets = pendingTargets();
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              reveal(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+
+        targets.forEach(function (el) { observer.observe(el); });
+      }
+
+      // Rede de segurança: cobre navegadores sem IntersectionObserver e
+      // qualquer caso em que o observer não dispare como esperado.
+      window.addEventListener('scroll', fallbackSweep, { passive: true });
+      window.addEventListener('resize', fallbackSweep);
+      window.addEventListener('load', fallbackSweep);
+      fallbackSweep();
     });
-  });
+  })();
 </script>
 </body>
 </html>
