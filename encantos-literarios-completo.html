@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encantos Literários — Clube de Assinatura Literário</title>
+<meta name="description" content="Encantos Literários: um clube de assinatura que leva até você um livro surpresa e mimos exclusivos todo mês.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <a href="#top" class="logo">
+    <img src="assets/logo-symbol.svg" alt="" class="logo__icon" aria-hidden="true">
+    <span class="logo__text">Encantos Literários</span>
+  </a>
+  <a href="#planos" class="btn btn--primary btn--sm">Assinar</a>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__visual">
+      <img src="assets/hero-background.png" alt="" class="hero__bg" aria-hidden="true">
+      <div class="hero__visual-text">
+        <h1 class="hero__title reveal-up is-visible">Desperte a sua imaginação<br>e explore novos mundos</h1>
+        <p class="hero__subtitle reveal-up is-visible">Junte-se ao clube de assinatura Encantos Literários e descubra maravilhas e aventuras a cada página.</p>
+      </div>
+    </div>
+
+    <img src="assets/mystery-opened-spellbook.png" alt="" class="mystery mystery--center float-anim" aria-hidden="true">
+
+    <p class="hero__lead reveal-up is-visible">
+      Receba todo mês um <span class="hl">livro surpresa</span> do seu tema favorito, acompanhado de
+      <span class="hl">brindes exclusivos</span> que tornarão a sua experiência literária <span class="hl">encantadora</span>.
+    </p>
+
+    <div class="hero__mystery-row">
+      <img src="assets/mystery-ouija-planchette.png" alt="" class="mystery mystery--corner float-anim" aria-hidden="true">
+      <img src="assets/mystery-crystal-ball.png" alt="" class="mystery mystery--corner float-anim-delay" aria-hidden="true">
+    </div>
+  </section>
+
+  <!-- ============ KIT DO MÊS ============ -->
+  <section class="kit" id="kit">
+    <h2 class="section-title section-title--center reveal-up is-visible">
+      <img src="assets/star.svg" class="title-spark" alt="" aria-hidden="true">
+      Conheça o kit mensal
+      <img src="assets/star.svg" class="title-spark" alt="" aria-hidden="true">
+    </h2>
+    <p class="section-subtitle reveal-up is-visible">Recebe uma caixa surpresa todos os meses</p>
+
+    <div class="kit__stage is-visible">
+      <svg class="kit__lines" viewBox="0 0 560 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path d="M180 75 C150 65 110 68 78 82" stroke="#9547A5" stroke-width="2" fill="none" marker-start="url(#arrow-pink)"/>
+        <path d="M117 287 C 92 300 62 310 40 320" stroke="#358BB9" stroke-width="2" fill="none" marker-start="url(#arrow-blue)"/>
+        <path d="M392 298 C 352 358 312 418 277 468" stroke="#73B6D2" stroke-width="2" fill="none" marker-end="url(#arrow-light)"/>
+        <defs>
+          <marker id="arrow-pink" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><circle cx="4" cy="4" r="3" fill="#9547A5"/></marker>
+          <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><circle cx="4" cy="4" r="3" fill="#358BB9"/></marker>
+          <marker id="arrow-light" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><circle cx="4" cy="4" r="3" fill="#73B6D2"/></marker>
+        </defs>
+      </svg>
+
+      <span class="kit__label kit__label--book">Livro em capa dura</span>
+
+      <div class="kit__art">
+        <img src="assets/bookmark-yellow.png" alt="" class="bookmark bookmark--yellow" aria-hidden="true">
+        <img src="assets/bookmark-purple.png" alt="" class="bookmark bookmark--purple" aria-hidden="true">
+        <img src="assets/book.png" alt="Capa do livro O Castelo da Colina" class="book-cover-img">
+        <img src="assets/pin.png" alt="" class="pin-img" aria-hidden="true">
+      </div>
+
+      <span class="kit__label kit__label--pin">Broche exclusivo</span>
+      <span class="kit__label kit__label--mark">Marca páginas temático</span>
+    </div>
+  </section>
+
+  <!-- ============ ASSINATURAS ============ -->
+  <section class="plans" id="planos">
+    <img src="assets/book-trace-background.png" alt="" class="plans__wave" aria-hidden="true">
+    <img src="assets/pricing-background.png" alt="" class="plans__texture" aria-hidden="true">
+
+    <div class="plans__content">
+      <h2 class="section-title section-title--center reveal-up is-visible">Assinatura<br>Encantos Literários</h2>
+
+      <div class="plans__grid is-visible">
+        <img src="assets/star.svg" class="plans__spark plans__spark--1" alt="" aria-hidden="true">
+        <img src="assets/star.svg" class="plans__spark plans__spark--2" alt="" aria-hidden="true">
+        <img src="assets/star.svg" class="plans__spark plans__spark--3" alt="" aria-hidden="true">
+
+        <article class="plan-card">
+          <h3 class="plan-card__name">Mensal</h3>
+          <p class="plan-card__price"><span>R$</span>59<small>,90</small><em>/mês</em></p>
+          <p class="plan-card__yearly">R$ 718,80 por ano</p>
+          <ul class="plan-card__benefits">
+            <li>Kit mensal com livro temático</li>
+            <li>Broche e marca páginas exclusivo</li>
+            <li>Acesso à comunidade literária</li>
+          </ul>
+          <a href="#" class="btn btn--blue btn--block">Assinar mensal</a>
+        </article>
+
+        <article class="plan-card plan-card--highlight">
+          <img src="assets/logo-symbol.svg" alt="" class="plan-card__symbol" aria-hidden="true">
+          <span class="plan-card__badge">Popular</span>
+          <h3 class="plan-card__name">Semestral</h3>
+          <p class="plan-card__price"><span>R$</span>52<small>,90</small><em>/mês</em></p>
+          <p class="plan-card__yearly">R$ 634,80 por ano</p>
+          <ul class="plan-card__benefits">
+            <li>Kit mensal com livro temático</li>
+            <li>Broche e marca páginas exclusivo</li>
+            <li>Acesso à comunidade literária</li>
+            <li>Membro premium do clube</li>
+          </ul>
+          <a href="#" class="btn btn--primary btn--block">Assinar semestral</a>
+        </article>
+
+        <article class="plan-card">
+          <h3 class="plan-card__name">Anual</h3>
+          <p class="plan-card__price"><span>R$</span>48<small>,90</small><em>/mês</em></p>
+          <p class="plan-card__yearly">R$ 586,80 por ano</p>
+          <ul class="plan-card__benefits">
+            <li>Kit mensal com livro temático</li>
+            <li>Broche e marca páginas exclusivo</li>
+            <li>Membro premium do clube</li>
+            <li>Planner anual de leituras</li>
+          </ul>
+          <a href="#" class="btn btn--blue btn--block">Assinar anual</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <a href="#top" class="logo logo--footer">
+    <img src="assets/logo-symbol.svg" alt="" class="logo__icon" aria-hidden="true">
+    <span class="logo__text">Encantos Literários</span>
+  </a>
+
+  <div class="footer__social" role="group" aria-label="Redes sociais">
+    <a href="#" aria-label="Instagram" class="social-icon"><img src="assets/instagram.svg" alt=""></a>
+    <a href="#" aria-label="Twitter" class="social-icon"><img src="assets/twitter.svg" alt=""></a>
+    <a href="#" aria-label="Facebook" class="social-icon"><img src="assets/facebook.svg" alt=""></a>
+    <a href="#" aria-label="Discord" class="social-icon"><img src="assets/discord.svg" alt=""></a>
+    <a href="#" aria-label="WhatsApp" class="social-icon"><img src="assets/whatsapp.svg" alt=""></a>
+    <a href="#" aria-label="E-mail" class="social-icon"><img src="assets/mail.svg" alt=""></a>
+  </div>
+
+  <nav class="footer__nav" aria-label="Links do rodapé">
+    <div class="footer__col">
+      <h4>Conteúdos</h4>
+      <a href="#">Kits passados</a>
+      <a href="#">Clube de membros</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="footer__col">
+      <h4>Ajuda</h4>
+      <a href="#">Central de ajuda</a>
+      <a href="#">Regulamentos</a>
+      <a href="#">Suporte</a>
+    </div>
+  </nav>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var targets = document.querySelectorAll('.reveal-up, .kit__stage, .plans__grid');
+    targets.forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  });
+</script>
+</body>
+</html>
