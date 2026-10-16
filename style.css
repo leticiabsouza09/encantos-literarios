@@ -30,6 +30,8 @@
   --container: 1120px;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --spring: cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -64,8 +66,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
 }
 
 @keyframes wobbleContinuous {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(-6deg); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .wobble-anim { animation: wobbleContinuous 5s ease-in-out infinite; }
@@ -77,32 +79,26 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
    Buttons
    ========================================================================== */
 .btn {
-  display: inline-block;
-  padding: 0.8rem 1.6rem;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 1.6rem;
+  border-radius: 8px;
   font-weight: 700;
   font-size: 0.875rem;
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.2s ease;
+  transition: transform 0.3s var(--ease-out), background 0.3s var(--ease-out);
 }
 
-.btn--sm { padding: 0.55rem 1.3rem; font-size: 0.85rem; }
+.btn--sm { padding: 0 1.3rem; font-size: 0.85rem; }
 
-.btn--primary {
-  background: linear-gradient(135deg, var(--pink-base), var(--pink-dark));
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(125, 41, 138, 0.4);
-}
+.btn--primary { background: var(--pink-dark); color: #fff; }
+.btn--primary:hover { background: var(--pink-base); transform: translateY(-2px); }
 
-.btn--primary:hover { background: linear-gradient(135deg, var(--pink-light), var(--pink-base)); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(125, 41, 138, 0.5); }
+.btn--blue { background: var(--blue-dark); color: #fff; }
+.btn--blue:hover { background: var(--blue-mid); transform: translateY(-2px); }
 
-.btn--blue {
-  background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
-  color: #fff;
-}
-
-.btn--blue:hover { background: linear-gradient(135deg, var(--blue-light), var(--blue-mid)); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(20, 74, 114, 0.45); }
-
-.btn--block { display: block; text-align: center; width: 100%; }
+.btn--block { display: flex; width: 100%; }
 
 /* ==========================================================================
    Reveal Effect
@@ -146,9 +142,18 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   backdrop-filter: blur(10px);
 }
 
-.logo { display: flex; align-items: center; gap: 0.55rem; }
-.logo__icon { height: 24px; width: auto; }
-.logo__text { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--text-title); }
+.logo { display: flex; align-items: center; }
+.logo__full { height: 38px; width: auto; display: none; }
+.logo__icon { height: 48px; width: auto; }
+
+@media (min-width: 640px) {
+  .logo__full { display: block; }
+  .logo__icon { display: none; }
+}
+
+@media (min-width: 1200px) {
+  .logo__full { height: 58px; }
+}
 
 /* ==========================================================================
    Hero
@@ -187,32 +192,52 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   padding: 0 1.25rem;
 }
 
+@media (max-width: 640px) {
+  .hero__visual-text {
+    position: static;
+    padding: 1.5rem 1.25rem 0;
+  }
+}
+
 .hero__title {
-  font-size: clamp(1.5rem, 4.2vw, 2.7rem);
+  font-size: clamp(1.5rem, 4.2vw, 3rem);
   line-height: 1.15;
   font-weight: 700;
-  max-width: 640px;
+  max-width: 656px;
   margin: 0 auto;
+  transition-duration: 0.8s;
+  transition-timing-function: linear;
 }
 
 .hero__subtitle {
   margin-top: 0.85rem;
   color: var(--text-label);
-  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-  max-width: 46ch;
+  font-size: clamp(0.85rem, 1.8vw, 1.25rem);
+  line-height: 1.4;
+  max-width: 568px;
   margin: 0.85rem auto 0;
+  transition-duration: 0.8s;
+  transition-timing-function: linear;
+  transition-delay: 0.8s;
 }
 
 .mystery { width: 40px; height: 40px; }
+.mystery-shell { display: inline-block; transition: transform 0.4s var(--spring); }
+.mystery-shell:hover { transform: scale(1.12); }
+
+.mystery-shell--center { margin: 1rem 0 1.5rem; }
 
 .mystery--center {
-  margin: 1rem auto 1.5rem;
+  width: clamp(55px, 7.9vw, 113.5px);
+  height: auto;
 }
 
 .hero__lead {
-  font-size: clamp(1.1rem, 2.4vw, 1.25rem);
+  font-size: clamp(1.15rem, 2.22vw, 2rem);
+  font-weight: 500;
+  line-height: 2;
   color: var(--text-title);
-  max-width: 640px;
+  max-width: 1136px;
   margin: 0 auto;
   text-align: center;
 }
@@ -228,16 +253,20 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   padding: 0 0.5rem clamp(3rem, 7vw, 4.5rem);
 }
 
-.mystery--corner {
-  width: 56px;
-  height: 56px;
-}
+.mystery--ouija { width: clamp(40px, 5.6vw, 80px); height: auto; }
+.mystery--crystal { width: clamp(36px, 5vw, 72px); height: auto; }
+
+.mystery-shell--ouija { transform: rotate(99.47deg); }
+.mystery-shell--ouija:hover { transform: rotate(99.47deg) scale(1.12); }
+
+.mystery-shell--crystal { transform: rotate(-14.48deg); }
+.mystery-shell--crystal:hover { transform: rotate(-14.48deg) scale(1.12); }
 
 /* ==========================================================================
    Titulos de Seção
    ========================================================================== */
 .section-title {
-  font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+  font-size: clamp(1.6rem, 3.6vw, 2rem);
   font-weight: 700;
   text-align: center;
   display: flex;
@@ -267,53 +296,63 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   padding: clamp(3.5rem, 8vw, 5.5rem) 1.5rem;
 }
 
+.kit__arrow {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1.022s var(--spring), transform 1.022s var(--spring);
+  pointer-events: none;
+}
+
+.kit__stage.is-visible .kit__arrow { opacity: 1; transform: translateY(0); }
+
+/* Mobile (<900px): palco 375x319, valores atuais mantidos sem alteração. */
+.kit__arrow--book { left: -18.75%; top: -21.2%; width: 32.14%; }
+.kit__arrow--pin { left: -27%; top: 55.6%; width: 19.11%; }
+.kit__arrow--marker { left: 97.5%; top: 94.4%; width: 27.68%; }
+
 .kit__stage {
   position: relative;
-  max-width: 560px;
+  max-width: 375px;
+  aspect-ratio: 375 / 319;
   margin: 3rem auto 0;
 }
 
-.kit__lines { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
-
-.kit__lines path {
-  stroke-dasharray: 340;
-  stroke-dashoffset: 340;
-  transition: stroke-dashoffset 0.9s var(--ease);
-  transition-delay: 0.35s;
-}
-
-.kit__stage.is-visible .kit__lines path { stroke-dashoffset: 0; }
-
 .kit__label {
-  display: block;
+  position: absolute;
   text-align: center;
-  font-size: 0.875rem;
-  color: var(--text-label);
-  margin: 0.75rem auto;
+  font-size: 1rem;
+  color: var(--text-title);
+  white-space: normal;
+  max-width: 110px;
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-  transition-delay: 0.35s;
+  transition: opacity 1.022s var(--spring), transform 1.022s var(--spring);
 }
 
 .kit__stage.is-visible .kit__label { opacity: 1; transform: translateY(0); }
 
+.kit__label--book { top: 14%; left: 0%; }
+.kit__label--pin { top: 65%; left: 2%; }
+.kit__label--mark { bottom: 2%; left: auto; right: 0; text-align: right; }
+
 .kit__art {
-  position: relative;
-  width: min(210px, 58vw);
-  margin: 0 auto;
+  width: min(154px, 41vw);
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pin-img {
   position: absolute;
-  width: 26%;
-  left: -16%;
-  bottom: 12%;
-  z-index: 3;
+  width: 12.22%;
+  left: 18.97%;
+  top: 62.21%;
+  z-index: 4;
   filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
   opacity: 0;
-  transition: opacity 0.7s var(--ease);
-  transition-delay: 0.35s;
+  transition: opacity 1.022s var(--spring);
 }
 
 .kit__stage.is-visible .pin-img { opacity: 1; }
@@ -321,10 +360,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
 .book-cover-img {
   position: relative;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
   filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
   opacity: 0;
-  transition: opacity 0.7s var(--ease);
+  transition: opacity 1.022s var(--spring);
 }
 
 .kit__stage.is-visible .book-cover-img { opacity: 1; }
@@ -335,42 +374,41 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   top: 4%;
   filter: drop-shadow(0 10px 14px rgba(0,0,0,0.4));
   opacity: 0;
-  transition: opacity 0.7s var(--ease);
-  transition-delay: 0.35s;
+  transition: opacity 1.022s var(--spring);
 }
 
 .kit__stage.is-visible .bookmark { opacity: 1; }
 
-.bookmark--yellow { right: -8%; transform: rotate(16deg); z-index: 3; }
-.bookmark--purple { right: -18%; transform: rotate(26deg); z-index: 4; }
+.bookmark--yellow { right: -8%; transform: rotate(16deg); z-index: 1; }
+.bookmark--purple { right: -18%; transform: rotate(26deg); z-index: 2; }
 
+/* Desktop (>=900px): palco igual ao frame "Book Kit" do Figma (1440x920).
+   Todo filho absoluto é posicionado em % desse frame (left: x/1440,
+   top: y/920, width: w/1440). */
 @media (min-width: 900px) {
   .kit__stage {
-    aspect-ratio: 560 / 500;
-    margin-top: 3.5rem;
+    max-width: 1440px;
+    aspect-ratio: 1440 / 920;
   }
 
-  .kit__lines { display: block; }
+  .kit__label { font-size: 1rem; white-space: nowrap; max-width: none; }
 
-  .kit__label {
-    position: absolute;
-    white-space: nowrap;
-    margin: 0;
-  }
+  .kit__label--book { top: 7.609%; left: 17.708%; }
+  .kit__label--pin { top: 49.457%; left: 18.889%; bottom: auto; }
+  .kit__label--mark { top: 93.804%; left: 62.292%; right: auto; bottom: auto; text-align: left; }
 
-  .kit__label--book { top: 14%; left: 0%; }
-  .kit__label--pin { top: 65%; left: 2%; }
-  .kit__label--mark { bottom: 2%; left: 70%; }
+  .kit__arrow--book { left: 23.264%; top: 12.609%; width: 12.153%; }
+  .kit__arrow--pin { left: 20.069%; top: 54.348%; width: 7.292%; }
+  .kit__arrow--marker { left: 68.472%; top: 75.435%; width: 10.069%; }
 
   .kit__art {
-    width: 230px;
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 32.431%;
+    top: 14.565%;
+    left: 32.847%;
+    transform: none;
   }
 
-  .pin-img { left: -34%; bottom: 14%; }
+  .pin-img { width: 15.417%; left: 22.083%; top: 65.217%; }
 }
 
 /* ==========================================================================
@@ -404,10 +442,19 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   position: relative;
   max-width: var(--container);
   margin: 4.5rem auto 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 1.5rem 0.5rem;
   min-width: 0;
+}
+
+.plans__grid .plan-card {
+  flex: 0 0 272px;
+  width: 272px;
+  min-height: 400px;
+  scroll-snap-align: center;
 }
 
 .plans__spark { position: absolute; width: 20px; height: 20px; animation: twinkleSpark 2.6s ease-in-out infinite; }
@@ -420,23 +467,19 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   background: var(--shape-base);
   border: 1px solid var(--shape-stroke);
   border-radius: var(--radius-lg);
-  padding: 2rem 1.6rem;
+  padding: 32px 32px 28px;
   display: flex;
   flex-direction: column;
   min-width: 0;
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  transition: opacity 1.278s var(--spring), transform 1.278s var(--spring), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
 }
 
 .plans__grid.is-visible .plan-card { opacity: 1; transform: translateY(0); }
 
-.plan-card:nth-of-type(1) { transition-delay: 0.25s; }
-.plan-card:nth-of-type(2) { transition-delay: 0s; }
-.plan-card:nth-of-type(3) { transition-delay: 0.4s; }
-
 .plan-card:hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
   transform: translateY(-6px) scale(1.02);
   z-index: 5;
   box-shadow: 0 20px 34px rgba(0,0,0,0.45);
@@ -445,39 +488,41 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
 }
 
 .plan-card--highlight {
-  background: linear-gradient(165deg, #1D0F30, var(--shape-base) 65%);
-  border-color: var(--pink-dark);
-  box-shadow: 0 0 0 1px rgba(125,41,138,0.35), 0 20px 40px rgba(125,41,138,0.16);
+  background: var(--shape-hover);
+  border: none;
+  box-shadow: none;
 }
+
+.plan-card--highlight:hover { background: var(--shape-hover); border-color: transparent; }
 
 .plan-card__symbol {
   position: absolute;
-  top: -22px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 44px;
+  top: -50px;
+  left: 32px;
+  width: 45px;
+  height: 50px;
 }
 
 .plan-card__badge {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: var(--blue-mid);
-  color: var(--text-title);
+  top: 23.9px;
+  right: 24.4px;
+  background: var(--shape-stroke);
+  color: var(--text-body);
   font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 0.3rem 0.7rem;
+  letter-spacing: 0.5px;
+  padding: 9px 20px;
   border-radius: 999px;
 }
 
-.plan-card__name { font-size: 0.875rem; margin-bottom: 0.9rem; color: var(--blue-light); font-weight: 500; }
+.plan-card__name { font-size: 1rem; margin-bottom: 0.9rem; color: var(--blue-light); font-weight: 700; }
 .plan-card--highlight .plan-card__name { color: var(--pink-light); }
 
 .plan-card__price {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   display: flex;
   align-items: baseline;
@@ -487,9 +532,9 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
 
 .plan-card__price span { font-size: 1rem; }
 .plan-card__price small { font-size: 1.2rem; }
-.plan-card__price em { font-style: normal; font-size: 0.75rem; color: var(--text-label); margin-left: 0.2rem; }
+.plan-card__price em { font-style: normal; font-weight: 700; font-size: 1rem; color: var(--text-label); margin-left: 0.2rem; }
 
-.plan-card__yearly { margin-top: 0.35rem; font-size: 0.75rem; color: var(--text-label); }
+.plan-card__yearly { margin-top: 0.35rem; font-size: 0.875rem; color: var(--text-label); }
 
 .plan-card__benefits {
   margin: 1.5rem 0 2rem;
@@ -502,7 +547,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
 .plan-card__benefits li {
   position: relative;
   padding-left: 1.5rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
 }
 
 .plan-card__benefits li::before {
@@ -533,21 +578,25 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
   text-align: center;
 }
 
-.footer__social { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
+.footer__social { display: flex; gap: 4.8px; flex-wrap: wrap; justify-content: center; }
 
 .social-icon {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid var(--shape-stroke);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 
-.social-icon img { width: 15px; height: 15px; }
+.social-icon img { width: 17px; height: 17px; }
 .social-icon:hover { background: var(--blue-mid); transform: translateY(-3px); }
+
+@media (min-width: 900px) {
+  .logo--footer .logo__full { height: 66.6px; }
+}
 
 .footer__nav { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; }
 .footer__col { text-align: left; }
@@ -555,37 +604,37 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(
 .footer__col a { display: block; font-size: 0.875rem; color: var(--text-label); padding: 0.3rem 0; }
 .footer__col a:hover { color: var(--blue-light); }
 
-@media (min-width: 640px) {
-  .plans__grid { grid-template-columns: repeat(2, 1fr); }
-  .plan-card--highlight { grid-column: span 2; }
-}
-
 @media (min-width: 900px) {
   .plans__grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
+    position: relative;
+    height: 460px;
+    display: block;
+    overflow: visible;
+    padding: 0;
   }
 
-  .plan-card {
-    flex: 0 0 280px;
-    margin: 0 -24px;
-    /* pré-revelação: os três cards ficam "escondidos" atrás do centro */
-    transform: translateX(0) scale(0.92);
+  .plans__grid .plan-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    flex: none;
+    width: 288px;
+    min-height: 0;
+    margin-left: -144px;
+    /* pré-revelação: os três cards ficam empilhados atrás do Semestral */
+    transform: translate(0.4px, -12.9px) scale(0.92) rotate(0deg);
   }
 
-  .plans__grid.is-visible .plan-card:nth-of-type(1) { transform: rotate(-6deg) translateX(20px) scale(1); z-index: 1; }
-  .plans__grid.is-visible .plan-card:nth-of-type(2) { transform: rotate(0deg) scale(1); z-index: 3; }
-  .plans__grid.is-visible .plan-card:nth-of-type(3) { transform: rotate(6deg) translateX(-20px) scale(1); z-index: 2; }
+  .plans__grid.is-visible .plan-card:nth-of-type(1) { transform: translate(-289.45px, 43.9px) rotate(-8deg); z-index: 1; }
+  .plans__grid.is-visible .plan-card:nth-of-type(2) { transform: translate(0.4px, -12.9px) rotate(0deg); z-index: 3; }
+  .plans__grid.is-visible .plan-card:nth-of-type(3) { transform: translate(289.3px, 44px) rotate(8deg); z-index: 2; }
 
   /* especificidade igual às regras acima; por vir depois no arquivo, esta
      regra vence e garante que o card hover perca a rotação e fique na frente
      de todos os outros, incluindo o card em destaque (z-index 3). */
-  .plans__grid.is-visible .plan-card:hover {
-    transform: translateY(-6px) scale(1.05) rotate(0deg);
-    z-index: 10;
-  }
+  .plans__grid.is-visible .plan-card:nth-of-type(1):hover { transform: translate(-289.45px, calc(43.9px - 10px)) scale(1.05) rotate(-8deg); z-index: 10; }
+  .plans__grid.is-visible .plan-card:nth-of-type(2):hover { transform: translate(0.4px, calc(-12.9px - 10px)) scale(1.05) rotate(0deg); z-index: 10; }
+  .plans__grid.is-visible .plan-card:nth-of-type(3):hover { transform: translate(289.3px, calc(44px - 10px)) scale(1.05) rotate(8deg); z-index: 10; }
 
   .footer { flex-direction: row; justify-content: space-between; text-align: left; }
 }

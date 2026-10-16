@@ -14,11 +14,11 @@
 
 <!-- ============ HEADER ============ -->
 <header class="header">
-  <a href="#top" class="logo">
+  <a href="#top" class="logo" aria-label="Encantos Literários">
+    <img src="assets/logo-horizontal.svg" alt="" class="logo__full" aria-hidden="true">
     <img src="assets/logo-symbol.svg" alt="" class="logo__icon" aria-hidden="true">
-    <span class="logo__text">Encantos Literários</span>
   </a>
-  <a href="#planos" class="btn btn--primary btn--sm">Assinar</a>
+  <a href="#planos" class="btn btn--primary btn--sm js-scroll-cta">Assinar</a>
 </header>
 
 <main id="top">
@@ -33,7 +33,9 @@
       </div>
     </div>
 
-    <img src="assets/mystery-opened-spellbook.png" alt="" class="mystery mystery--center reveal-fade wobble-anim wobble-anim--1" style="--d: 1s" aria-hidden="true">
+    <span class="mystery-shell mystery-shell--center">
+      <img src="assets/mystery-opened-spellbook.png" alt="" class="mystery mystery--center reveal-fade wobble-anim wobble-anim--1" style="--d: 0s" aria-hidden="true">
+    </span>
 
     <p class="hero__lead reveal-up" style="--d: 0.6s">
       Receba todo mês um <span class="hl">livro surpresa</span> do seu tema favorito, acompanhado de
@@ -41,8 +43,12 @@
     </p>
 
     <div class="hero__mystery-row">
-      <img src="assets/mystery-ouija-planchette.png" alt="" class="mystery mystery--corner reveal-fade wobble-anim wobble-anim--2" style="--d: 1.3s" aria-hidden="true">
-      <img src="assets/mystery-crystal-ball.png" alt="" class="mystery mystery--corner reveal-fade wobble-anim wobble-anim--3" style="--d: 1.5s" aria-hidden="true">
+      <span class="mystery-shell mystery-shell--ouija">
+        <img src="assets/mystery-ouija-planchette.png" alt="" class="mystery mystery--ouija reveal-fade wobble-anim wobble-anim--2" style="--d: 0.511s" aria-hidden="true">
+      </span>
+      <span class="mystery-shell mystery-shell--crystal">
+        <img src="assets/mystery-crystal-ball.png" alt="" class="mystery mystery--crystal reveal-fade wobble-anim wobble-anim--3" style="--d: 1.022s" aria-hidden="true">
+      </span>
     </div>
   </section>
 
@@ -56,16 +62,9 @@
     <p class="section-subtitle reveal-up">Recebe uma caixa surpresa todos os meses</p>
 
     <div class="kit__stage">
-      <svg class="kit__lines" viewBox="0 0 560 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <path d="M180 75 C160 58 128 52 116 64 C106 74 118 90 106 92 C92 94 86 86 78 82" stroke="#9547A5" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
-        <path d="M117 287 C98 268 68 274 74 294 C78 308 54 302 40 320" stroke="#9547A5" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
-        <path d="M392 298 C420 335 388 372 404 402 C414 422 388 434 396 468" stroke="#9547A5" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
-        <defs>
-          <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto" markerUnits="strokeWidth">
-            <path d="M0 0 L10 5 L0 10 Z" fill="#9547A5"/>
-          </marker>
-        </defs>
-      </svg>
+      <img src="assets/arrow-book.svg" alt="" class="kit__arrow kit__arrow--book" aria-hidden="true">
+      <img src="assets/arrow-pin.svg" alt="" class="kit__arrow kit__arrow--pin" aria-hidden="true">
+      <img src="assets/arrow-marker.svg" alt="" class="kit__arrow kit__arrow--marker" aria-hidden="true">
 
       <span class="kit__label kit__label--book">Livro em capa dura</span>
 
@@ -73,8 +72,9 @@
         <img src="assets/bookmark-yellow.png" alt="" class="bookmark bookmark--yellow" aria-hidden="true">
         <img src="assets/bookmark-purple.png" alt="" class="bookmark bookmark--purple" aria-hidden="true">
         <img src="assets/book.png" alt="Capa do livro O Castelo da Colina" class="book-cover-img">
-        <img src="assets/pin.png" alt="" class="pin-img" aria-hidden="true">
       </div>
+
+      <img src="assets/pin.png" alt="" class="pin-img" aria-hidden="true">
 
       <span class="kit__label kit__label--pin">Broche exclusivo</span>
       <span class="kit__label kit__label--mark">Marca páginas temático</span>
@@ -107,7 +107,7 @@
         </article>
 
         <article class="plan-card plan-card--highlight">
-          <img src="assets/logo-symbol.svg" alt="" class="plan-card__symbol" aria-hidden="true">
+          <img src="assets/bunny.svg" alt="" class="plan-card__symbol" aria-hidden="true">
           <span class="plan-card__badge">Popular</span>
           <h3 class="plan-card__name">Semestral</h3>
           <p class="plan-card__price"><span>R$</span>52<small>,90</small><em>/mês</em></p>
@@ -141,9 +141,9 @@
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <a href="#top" class="logo logo--footer">
+  <a href="#top" class="logo logo--footer" aria-label="Encantos Literários">
+    <img src="assets/logo-horizontal.svg" alt="" class="logo__full" aria-hidden="true">
     <img src="assets/logo-symbol.svg" alt="" class="logo__icon" aria-hidden="true">
-    <span class="logo__text">Encantos Literários</span>
   </a>
 
   <div class="footer__social" role="group" aria-label="Redes sociais">
@@ -220,6 +220,33 @@
       window.addEventListener('resize', fallbackSweep);
       window.addEventListener('load', fallbackSweep);
       fallbackSweep();
+
+      // Clique no botão da navbar: rola até os planos em ~1000ms com easing
+      // GENTLE, no lugar do scroll instantâneo/padrão do navegador.
+      var scrollCta = document.querySelector('.js-scroll-cta');
+      var target = document.getElementById('planos');
+      if (scrollCta && target && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        scrollCta.addEventListener('click', function (e) {
+          e.preventDefault();
+          var startY = window.pageYOffset;
+          var endY = target.getBoundingClientRect().top + startY;
+          var duration = 1000;
+          var startTime = null;
+
+          function spring(t) {
+            return 1 - Math.pow(1 - t, 3) * Math.cos(t * Math.PI * 0.6);
+          }
+
+          function step(now) {
+            if (startTime === null) startTime = now;
+            var progress = Math.min((now - startTime) / duration, 1);
+            window.scrollTo({ top: startY + (endY - startY) * spring(progress), behavior: 'instant' });
+            if (progress < 1) requestAnimationFrame(step);
+          }
+
+          requestAnimationFrame(step);
+        });
+      }
     });
   })();
 </script>
